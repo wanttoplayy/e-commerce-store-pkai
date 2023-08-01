@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 export const formatter = new Intl.NumberFormat("en-US", {
   style: "currency",
-  currency: "USD",
+  currency: "THB",
 });
 
 interface CurrencyProps {
