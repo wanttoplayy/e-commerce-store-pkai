@@ -95,7 +95,7 @@ const Summary = () => {
       <Button
         onClick={onCheckout}
         disabled={items.length === 0}
-        className="w-full mt-6"
+        className="w-full mt-5"
       >
         สั่งซื้อ
       </Button>
