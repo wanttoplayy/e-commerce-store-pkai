@@ -14,18 +14,26 @@ const Summary = () => {
   const items = useCart((state) => state.items);
   const removeAll = useCart((state) => state.removeAll);
   const [inputNumber, setInputNumber] = useState("");
-  const [inputAmount, setInputAmount] = useState("");
   const [qrCode, setQRCode] = useState(null);
+
+  // Calculate total price based on the items in the cart
+  const totalCartPrice = () => {
+    return items.reduce((total, item) => {
+      return total + Number(item.price);
+    }, 0);
+  };
 
   const generateQR = async () => {
     try {
       const response = await axios.post("/api/generate", {
         phoneNumber: inputNumber,
-        amount: Number(inputAmount), // Use the amount from the input
+        amount: totalCartPrice(), // Use the totalCartPrice function to get the total price
       });
-
-      setQRCode(response.data.qrCode);
+      const qrDataURL = await QRCode.toDataURL(response.data.qrCode);
+      setQRCode(qrDataURL);
       console.log(response.data.qrCode);
+      console.log(response);
+
     } catch (error) {
       console.error(error);
       // display a toast or some other form of error message
@@ -42,10 +50,6 @@ const Summary = () => {
       toast.error("Something went wrong.");
     }
   }, [searchParams, removeAll]);
-
-  const totalPrice = items.reduce((total, item) => {
-    return total + Number(item.price);
-  }, 0);
 
   const onCheckout = async () => {
     const response = await axios.post(
@@ -68,13 +72,6 @@ const Summary = () => {
           placeholder="Enter phone number"
           className="border rounded-lg p-2"
         />
-        <input
-          type="text"
-          value={inputAmount}
-          onChange={(e) => setInputAmount(e.target.value)}
-          placeholder="Enter amount"
-          className="border rounded-lg p-2"
-        />
         <button
           onClick={generateQR}
           className="bg-blue-600 text-white rounded-lg px-4 py-2"
@@ -92,7 +89,7 @@ const Summary = () => {
       <div className="mt-6 space-y-4">
         <div className="flex items-center justify-between border-t border-gray-200 pt-4">
           <div className="text-base font-medium text-gray-900">ยอดทั้งหมด</div>
-          <Currency value={totalPrice} />
+          <Currency value={totalCartPrice()} />
         </div>
       </div>
       <Button
