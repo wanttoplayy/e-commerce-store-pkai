@@ -19,14 +19,13 @@ const Summary = () => {
 
   const generateQR = async () => {
     try {
-      const response = await axios.post("/api/generate-qr", {
+      const response = await axios.post("/api/generate", {
         phoneNumber: inputNumber,
         amount: Number(inputAmount), // Use the amount from the input
       });
 
-      // Generate a Data URL for the QR code
-      const qrDataURL = await QRCode.toDataURL(response.data.qrCode);
-      setQRCode(qrDataURL);
+      setQRCode(response.data.qrCode);
+      console.log(response.data.qrCode);
     } catch (error) {
       console.error(error);
       // display a toast or some other form of error message
