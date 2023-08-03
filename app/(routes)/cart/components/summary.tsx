@@ -8,12 +8,13 @@ import Button from "@/components/ui/button";
 import Currency from "@/components/ui/currency";
 import useCart from "@/hooks/use-cart";
 import { toast } from "react-hot-toast";
+import scanQR from "@/public/ThaiQR.jpg"
+import Image from "next/image";
 
 const Summary = () => {
   const searchParams = useSearchParams();
   const items = useCart((state) => state.items);
   const removeAll = useCart((state) => state.removeAll);
-  const [inputNumber, setInputNumber] = useState("");
   const [qrCode, setQRCode] = useState(null);
 
   // Calculate total price based on the items in the cart
@@ -26,7 +27,7 @@ const Summary = () => {
   const generateQR = async () => {
     try {
       const response = await axios.post("/api/generate", {
-        phoneNumber: inputNumber,
+        phoneNumber: "0966863456",
         amount: totalCartPrice(), // Use the totalCartPrice function to get the total price
       });
       const qrDataURL = await QRCode.toDataURL(response.data.qrCode);
@@ -63,42 +64,42 @@ const Summary = () => {
   };
 
   return (
-    <div className="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8">
-      <div className="flex flex-col items-center justify-center space-y-4">
-        <input
-          type="text"
-          value={inputNumber}
-          onChange={(e) => setInputNumber(e.target.value)}
-          placeholder="Enter phone number"
-          className="border rounded-lg p-2"
-        />
-        <button
-          onClick={generateQR}
-          className="bg-blue-600 text-white rounded-lg px-4 py-2"
-        >
-          Generate QR Code
-        </button>
-        {qrCode && (
-          <div>
-            <p>QR Code:</p>
-            <img src={qrCode} alt="Generated QR Code" />
+    <div className="mt-16 rounded-lg px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-0">
+      <div className="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-0 ">
+        <h1>ชำระด้วย QR code</h1>
+        <div className="flex flex-col items-center justify-center space-y-4">
+          <Image src={scanQR} className="h-[150px] object-cover" />
+          <button
+            onClick={generateQR}
+            className="bg-[#01427a] text-white rounded-lg px-4 py-2"
+          >
+            กดเพื่อแสดง QR Code
+          </button>
+          {qrCode && (
+            <div>
+              <p className="text-center">QR Code :</p>
+              <img src={qrCode} alt="Generated QR Code" width={300} />
+            </div>
+          )}
+        </div>
+        {/* <h2 className="text-lg font-medium text-gray-900">สรุปยอดสินค้า</h2> */}
+        <div className="mt-6 space-y-4">
+          <div className="flex items-center justify-around gap-20 border-t border-gray-200 pt-4">
+            <div className="text-base font-medium text-gray-900">ยอดทั้งหมด</div>
+            <Currency value={totalCartPrice()} />
           </div>
-        )}
-      </div>
-      <h2 className="text-lg font-medium text-gray-900">สรุปยอดสินค้า</h2>
-      <div className="mt-6 space-y-4">
-        <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-          <div className="text-base font-medium text-gray-900">ยอดทั้งหมด</div>
-          <Currency value={totalCartPrice()} />
         </div>
       </div>
-      <Button
-        onClick={onCheckout}
-        disabled={items.length === 0}
-        className="w-full mt-5"
-      >
-        สั่งซื้อ
-      </Button>
+      <div className="mt-10">
+        <h1>ชำระด้วยบัตรเครดิต</h1>
+        <Button
+          onClick={onCheckout}
+          disabled={items.length === 0}
+          className="w-full mt-5"
+        >
+          สั่งซื้อ
+        </Button>
+      </div>
     </div>
   );
 };
