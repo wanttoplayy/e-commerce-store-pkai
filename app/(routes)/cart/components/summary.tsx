@@ -64,11 +64,11 @@ const Summary = () => {
   };
 
   return (
-    <div className="mt-16 rounded-lg px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-0">
-      <div className="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-0 ">
-        <h1>ชำระด้วย QR code</h1>
+    <div className="border-black border-2 mt-16 rounded-lg px-4 py-5 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-5">
+
+      <div className="rounded-lg px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-0 ">
+        <h1 className="text-center mb-3">ชำระด้วย QR code</h1>
         <div className="flex flex-col items-center justify-center space-y-4">
-          <Image src={scanQR} className="h-[150px] object-cover" />
           <button
             onClick={generateQR}
             className="bg-[#01427a] text-white rounded-lg px-4 py-2"
@@ -76,29 +76,31 @@ const Summary = () => {
             กดเพื่อแสดง QR Code
           </button>
           {qrCode && (
-            <div>
-              <p className="text-center">QR Code :</p>
+            <div className="flex flex-col items-center">
+              <Image src={scanQR} className="h-[150px] object-cover" />
               <img src={qrCode} alt="Generated QR Code" width={300} />
             </div>
           )}
         </div>
         {/* <h2 className="text-lg font-medium text-gray-900">สรุปยอดสินค้า</h2> */}
-        <div className="mt-6 space-y-4">
-          <div className="flex items-center justify-around gap-20 border-t border-gray-200 pt-4">
-            <div className="text-base font-medium text-gray-900">ยอดทั้งหมด</div>
-            <Currency value={totalCartPrice()} />
-          </div>
-        </div>
+
       </div>
-      <div className="mt-10">
-        <h1>ชำระด้วยบัตรเครดิต</h1>
+      <div className="mt-10 flex flex-col items-center">
+        <h1 className="text-center mb-3">ชำระด้วยบัตรเครดิต</h1>
         <Button
           onClick={onCheckout}
           disabled={items.length === 0}
-          className="w-full mt-5"
+          className="bg-[#01427a] text-white rounded-lg px-4 py-2"
         >
-          สั่งซื้อ
+          กดเพื่อชำระด้วยบัตร
         </Button>
+
+      </div>
+      <div className="mt-6 space-y-4">
+        <div className="flex items-center justify-around gap-20 pt-4">
+          <div className="font-semibold text-[20px] text-gray-900">ยอดทั้งหมด</div>
+          <p className="font-bold text-[25px] underline">{totalCartPrice()} บาท</p>
+        </div>
       </div>
     </div>
   );
