@@ -8,7 +8,7 @@ import Button from "@/components/ui/button";
 import Currency from "@/components/ui/currency";
 import useCart from "@/hooks/use-cart";
 import { toast } from "react-hot-toast";
-import scanQR from "@/public/ThaiQR.jpg"
+import scanQR from "@/public/ThaiQR.jpg";
 import Image from "next/image";
 
 const Summary = () => {
@@ -34,7 +34,6 @@ const Summary = () => {
       setQRCode(qrDataURL);
       console.log(response.data.qrCode);
       console.log(response);
-
     } catch (error) {
       console.error(error);
       // display a toast or some other form of error message
@@ -65,7 +64,6 @@ const Summary = () => {
 
   return (
     <div className="border-black border-2 mt-16 rounded-lg px-4 py-5 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-5">
-
       <div className="rounded-lg px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-0 ">
         <h1 className="text-center mb-3">ชำระด้วย QR code</h1>
         <div className="flex flex-col items-center justify-center space-y-4">
@@ -85,7 +83,6 @@ const Summary = () => {
           )}
         </div>
         {/* <h2 className="text-lg font-medium text-gray-900">สรุปยอดสินค้า</h2> */}
-
       </div>
       <div className="mt-10 flex flex-col items-center">
         <h1 className="text-center mb-3">ชำระด้วยบัตรเครดิต</h1>
@@ -96,12 +93,15 @@ const Summary = () => {
         >
           กดเพื่อชำระด้วยบัตร
         </Button>
-
       </div>
       <div className="mt-6 space-y-4">
         <div className="flex items-center justify-around gap-20 pt-4">
-          <div className="font-semibold text-[20px] text-gray-900">ยอดทั้งหมด</div>
-          <p className="font-bold text-[25px] underline">{totalCartPrice()} บาท</p>
+          <div className="font-semibold text-[20px] text-gray-900">
+            ยอดทั้งหมด
+          </div>
+          <p className="font-bold text-[25px] underline">
+            {totalCartPrice()} บาท
+          </p>
         </div>
       </div>
     </div>
