@@ -71,7 +71,9 @@ const Summary = () => {
         <div className="flex flex-col items-center justify-center space-y-4">
           <button
             onClick={generateQR}
-            className="bg-[#01427a] text-white rounded-lg px-4 py-2"
+            disabled={items.length === 0}
+            className="bg-[#01427a] text-white rounded-lg px-4 py-2         disabled:cursor-not-allowed 
+            disabled:opacity-50"
           >
             กดเพื่อแสดง QR Code
           </button>

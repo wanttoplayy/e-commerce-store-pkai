@@ -4,6 +4,7 @@ import Billboard from "@/components/ui/billboard";
 import getProducts from "@/actions/get-products";
 import ProductList from "@/components/product-list";
 import Button from "@/components/ui/button";
+import VideoPlayer from "@/components/ui/video";
 
 export const revalidate = 0;
 
@@ -14,6 +15,9 @@ const Hompage = async () => {
     <Container>
       <div className="space-y-10 pb-10">
         <Billboard data={billboard} />
+        <div className="flex justify-center">
+          <VideoPlayer />
+        </div>
         <div className="flex justify-center ">
           <Button >รับส่วนลด</Button>
         </div>
