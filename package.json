@@ -20,6 +20,7 @@
     "eslint-config-next": "13.4.12",
     "lucide-react": "^0.263.1",
     "next": "13.4.12",
+    "next-cloudinary": "^4.17.0",
     "postcss": "8.4.27",
     "promptpay-qr": "^0.5.0",
     "qrcode": "^1.5.3",
