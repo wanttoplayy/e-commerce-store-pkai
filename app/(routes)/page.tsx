@@ -5,7 +5,7 @@ import getProducts from "@/actions/get-products";
 import ProductList from "@/components/product-list";
 import Button from "@/components/ui/button";
 import VideoPlayer from "@/components/ui/video";
-
+import ModalDiscount from "@/components/ui/modal-discount";
 export const revalidate = 0;
 
 const Hompage = async () => {
@@ -19,7 +19,7 @@ const Hompage = async () => {
           <VideoPlayer />
         </div>
         <div className="flex justify-center ">
-          <Button>รับส่วนลด</Button>
+          <ModalDiscount />
         </div>
         <div className=" flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
           <ProductList title="สินค้าแนะนำ" items={products} />
