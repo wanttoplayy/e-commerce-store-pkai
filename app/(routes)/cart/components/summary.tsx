@@ -77,7 +77,11 @@ const Summary = () => {
           </button>
           {qrCode && (
             <div className="flex flex-col items-center">
-              <Image src={scanQR} className="h-[150px] object-cover" />
+              <Image
+                alt="Generate QR code"
+                src={scanQR}
+                className="h-[150px] object-cover"
+              />
               <img src={qrCode} alt="Generated QR Code" width={300} />
             </div>
           )}
