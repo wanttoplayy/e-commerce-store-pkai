@@ -15,7 +15,7 @@ const Summary = () => {
   const searchParams = useSearchParams();
   const items = useCart((state) => state.items);
   const removeAll = useCart((state) => state.removeAll);
-  const [qrCode, setQRCode] = useState(null);
+  const [qrCode, setQRCode] = useState<string | null>(null);
 
   // Calculate total price based on the items in the cart
   const totalCartPrice = () => {
